@@ -708,20 +708,9 @@ int main(int argc, char *args[])
 					//printf("Coins: %d\n", coins.size());
 					if (coins.size() > 50)
 						coins.erase(coins.begin());
-					for (std::vector<Entity>::iterator it = coins.begin(); it != coins.end(); ++it)
+					for (std::vector<Entity>::iterator it = coins.begin(); it != coins.end();)
 					{
 						int x = it->getX();
-						bool coinCollision = checkCollision(plane.getBox(), it->getBox());
-						if (coinCollision)
-						{
-							score++;
-							coins.erase(it);
-							Mix_PlayChannel(-1, g1up, 0);
-						} /*
-						else
-						{
-							++it; // iterate if we're not erasing
-						}*/
 						if (it->inGame())
 						{
 							gSpriteSheetTexture.render(x, it->getY(), it->getCurrentFrame(), 0, NULL, SDL_FLIP_NONE);
@@ -730,6 +719,17 @@ int main(int argc, char *args[])
 									it->setX(x - 4);
 								else
 									it->setX(x - 2);
+						}
+						bool coinCollision = checkCollision(plane.getBox(), it->getBox());
+						if (coinCollision)
+						{
+							score++;
+							coins.erase(it);
+							Mix_PlayChannel(-1, g1up, 0);
+						}
+						else
+						{
+							++it; // iterate if we're not erasing
 						}
 					}
 				}
