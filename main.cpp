@@ -693,7 +693,9 @@ int main(int argc, char *args[])
 						// render rock
 						gSpriteSheetTexture.render(x, it->getY(), it->getCurrentFrame(), 0, NULL, SDL_FLIP_NONE);
 						if (!gameOver)
-							if (score > 30)
+							if (score > 60)
+								it->setX(x - 6);
+							else if (score > 30)
 								it->setX(x - 4);
 							else
 								it->setX(x - 2);
@@ -715,7 +717,9 @@ int main(int argc, char *args[])
 						{
 							gSpriteSheetTexture.render(x, it->getY(), it->getCurrentFrame(), 0, NULL, SDL_FLIP_NONE);
 							if (!gameOver)
-								if (score > 30)
+								if (score > 60)
+									it->setX(x - 6);
+								else if (score > 30)
 									it->setX(x - 4);
 								else
 									it->setX(x - 2);
